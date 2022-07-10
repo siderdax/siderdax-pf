@@ -1,8 +1,20 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import 'dotenv/config'
+import { NestFactory } from '@nestjs/core'
+import { NestExpressApplication } from '@nestjs/platform-express'
+import { AppModule } from './app.module'
+import * as session from 'express-session'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+  })
+  app.use(
+    session({
+      secret: process.env.EXPRESS_SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+    })
+  )
+  await app.listen(3000)
 }
-bootstrap();
+bootstrap()
