@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { OAuth2Strategy } from 'passport-oauth'
-import { connected } from 'process'
 
 @Injectable()
 export class NotionStrategy extends PassportStrategy(OAuth2Strategy, 'notion') {
@@ -29,7 +28,8 @@ export class NotionStrategy extends PassportStrategy(OAuth2Strategy, 'notion') {
     })
   }
 
-  async validate(accessToken: any, refreshToken: any, profile: any, done) {
+  async validate(accessToken: any, refreshToken: any, profile: any) {
+    console.log(`accessToken: ${accessToken}`)
     return {
       accessToken,
     }
