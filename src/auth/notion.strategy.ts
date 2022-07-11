@@ -30,24 +30,6 @@ export class NotionStrategy extends PassportStrategy(OAuth2Strategy, 'notion') {
     })
 
     Object.defineProperty(this._verify, 'length', { value: 6 })
-
-    // this._verify_no_length = this._verify
-    // this._verify = (
-    //   req: Request,
-    //   accessToken: any,
-    //   refreshToken: any,
-    //   params: any,
-    //   profile: any,
-    //   cb: any
-    // ) =>
-    //   this._verify_no_length(
-    //     req,
-    //     accessToken,
-    //     refreshToken,
-    //     params,
-    //     profile,
-    //     cb
-    //   )
   }
 
   async validate(
