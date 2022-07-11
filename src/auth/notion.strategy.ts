@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
+import { Request } from 'express'
 import { OAuth2Strategy } from 'passport-oauth'
 
 @Injectable()
@@ -25,11 +26,39 @@ export class NotionStrategy extends PassportStrategy(OAuth2Strategy, 'notion') {
             'utf-8'
           ).toString('base64'),
       },
+      passReqToCallback: true,
     })
+
+    Object.defineProperty(this._verify, 'length', { value: 6 })
+
+    // this._verify_no_length = this._verify
+    // this._verify = (
+    //   req: Request,
+    //   accessToken: any,
+    //   refreshToken: any,
+    //   params: any,
+    //   profile: any,
+    //   cb: any
+    // ) =>
+    //   this._verify_no_length(
+    //     req,
+    //     accessToken,
+    //     refreshToken,
+    //     params,
+    //     profile,
+    //     cb
+    //   )
   }
 
-  async validate(accessToken: any, refreshToken: any, profile: any) {
-    console.log(`accessToken: ${accessToken}`)
+  async validate(
+    req: Request,
+    accessToken: any,
+    refreshToken: any,
+    params: any,
+    profile: any,
+    cb: any
+  ) {
+    console.log(`params: ${params}`)
     return {
       accessToken,
     }

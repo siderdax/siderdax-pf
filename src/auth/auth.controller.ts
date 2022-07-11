@@ -1,6 +1,5 @@
 import { Controller, Get, Next, Req, Res, UseGuards } from '@nestjs/common'
 import { NotionAuthGuard } from './notion-auth.guard'
-import * as passport from 'passport'
 import { NotionStrategy } from './notion.strategy'
 
 @Controller('auth')
