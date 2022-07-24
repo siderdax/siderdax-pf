@@ -29,7 +29,7 @@ export class NotionStrategy extends PassportStrategy(OAuth2Strategy, 'notion') {
       passReqToCallback: true,
     })
 
-    Object.defineProperty(this._verify, 'length', { value: 6 })
+    Object.defineProperty(this._verify, 'length', { value: this.validate.length })
   }
 
   async validate(
@@ -40,9 +40,10 @@ export class NotionStrategy extends PassportStrategy(OAuth2Strategy, 'notion') {
     profile: any,
     cb: any
   ) {
-    console.log(`params: ${params}`)
     return {
       accessToken,
+      refreshToken,
+      params
     }
   }
 }
