@@ -42,6 +42,6 @@ export class AuthController {
   @Get('fail')
   @UseGuards(NotionAuthGuard)
   async profile() {
-    return 'fail';
+    return 'failed to login';
   }
 }
